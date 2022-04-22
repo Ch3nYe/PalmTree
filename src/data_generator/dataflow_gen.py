@@ -13,6 +13,7 @@ import pickle
 from  collections import Counter
 import gc
 
+random.seed(233)
 
 def parse_instruction(ins, symbol_map, string_map, str_list):
     ins = re.sub('\s+', ', ', ins, 1)
@@ -100,7 +101,7 @@ def process_file(f, str_list):
         if len(G.nodes) > 2:
             function_graphs[func.name] = G
     
-    with open('corpus/dfg_train.txt', 'a') as w:
+    with open('corpus/dfg_train.txt', 'w+') as w:
         for name, graph in function_graphs.items():
             sequence = random_walk(graph, 40, symbol_map, string_map, str_list)
             for s in sequence:
